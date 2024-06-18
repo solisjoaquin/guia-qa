@@ -90,6 +90,19 @@ export const repositories = [
           ]
         },
         {
+          name: 'mobile',
+          platform: [
+            {
+              name: 'ml',
+              url: 'meli://localhost:3000/details',
+            },
+            {
+              name: 'mp',
+              url: 'meli://localhost:3001/details',
+            },
+          ]
+        },
+        {
           name: 'test',
           platform: [
             {

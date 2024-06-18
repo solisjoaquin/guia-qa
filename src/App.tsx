@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { repositories } from './repositories'
+import { SingleCheck } from './components/singleCheck'
 
 function App() {
   const [selectedRepo, setSelectedRepo] = useState(repositories[0])
@@ -24,25 +25,25 @@ function App() {
       </div>
 
       <div>
-        <h2 className='text-4xl font-bold pt-4'>
+        <h2 className='text-3xl md:text-4xl font-bold pt-4'>
           Selected repository: <span className='text-orange-600'>{selectedRepo.name}</span>
         </h2>
-        <div className='pt-4 grid grid-cols-2 gap-4'>
+        <div className='pt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
           {selectedRepo.environment.map((env) => (
             <div 
               className='border border-gray-300 rounded-md p-4'
               key={env.name}>
-              <h3 className='text-2xl font-bold py-2'>
+              <h3 className='text-xl md:text-2xl font-bold py-2'>
                 {env.name}
               </h3>
               <div>
-                {env.platform.map((platform) => (
-                  <div key={platform.name}>
+                {env.platform.map((platform, index) => (
+                  <div key={index}>
                     <div className='flex gap-2'>
                       <h4 className='text-lg font-bold py-2'>
                         {platform.name}
                       </h4>
-                      <input type='checkbox' />
+                      {/* <input type='checkbox' /> */}
                     </div>
                     
                     <a 
@@ -61,23 +62,13 @@ function App() {
 
         {selectedRepo.casuisticas &&
           <div className='pt-4'>
-            <h2 className='text-2xl font-bold'>Casuisticas</h2>
+            <h2 className='text-xl md:text-2xl font-bold'>Casuisticas</h2>
             <div>
               {selectedRepo.casuisticas.map((casuistica) => (
-                <div 
-                  className='border border-gray-300 rounded-md p-4 mt-2'
-                  key={casuistica.userId}>
-                    <div className='flex gap-2' >
-                      <h4 className='text-lg font-bold py-2'>
-                        {casuistica.userId}
-                      </h4>
-                      <input type='checkbox' />
-                    </div>
-                  
-                  <p>
-                    {casuistica.description}
-                  </p>
-                </div>
+                <SingleCheck 
+                  key={casuistica.userId} 
+                  casuistica={casuistica}
+                />
               ))}
             </div>
           </div>
